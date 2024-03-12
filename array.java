@@ -39,6 +39,22 @@ public class Arrayutil{
         return result;
     }
 
+    // Reversing an array in Java
+    // Two pointers is used
+
+    public static  int[] reverseArray(int[] arr, int start, int end){
+        while (start < end){
+            int temp = arr[start];
+            arr[start] = arr[end];
+            arr[end] = temp;
+            start++;
+            end--;
+        }
+
+        return arr;
+    }
+
+
 
     public static void main(String[] args){
         Arrayutil arrUtil = new Arrayutil();
@@ -46,5 +62,8 @@ public class Arrayutil{
 
         int[] arr = {3, 2, 4, 7, 10, 6, 5};
         arrUtil.printArray(arrUtil.removeEven(arr));
+
+        System.out.println(arr.length - 1);
+        arrUtil.printArray(arrUtil.reverseArray(arr, 0, arr.length-1));
     }
 }
