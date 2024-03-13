@@ -103,8 +103,28 @@ public class Arrayutil{
         return arr;
     }
 
+    // Resizing an array
+    public static int[] resize(int[] arr, int capacity){
+        int[] temp = new int[capacity];
+        for (int i = 0; i< arr.length; i++){
+            temp[i] = arr[i];
+        }
+        arr = temp;
+        return arr;
+    }
 
+    // Given an array of n -1 distinct numbers in the range of 1 to n. Find the missing number in it.
+    // Use the mathematical approach:
+    // The sum of the first n natural numbers = (n * (n+ 1))/ 2
 
+    public static int missingNumber(int[] arr){
+        int n = arr.length + 1;
+        int sum = (n * (n+ 1))/2;
+        for (int num: arr){
+            sum = sum - num;
+        }
+        return sum;
+    }
 
     public static void main(String[] args){
         Arrayutil arrUtil = new Arrayutil();
@@ -127,7 +147,17 @@ public class Arrayutil{
         // System.out.println(arrUtil.findSecondMaximum(arr));
 
         // Move zeros to end demo
-        int[] arr = {8, 2, 0, 7, 6, 0, 9, 5};
-        arrUtil.printArray( arrUtil.moveZeros(arr));
+        // int[] arr = {8, 2, 0, 7, 6, 0, 9, 5};
+        // arrUtil.printArray( arrUtil.moveZeros(arr));
+
+        // Resize array demo
+        // int[] arr = {5, 9, 3, 10};
+        // arr = arrUtil.resize(arr, 8);
+        // arrUtil.printArray(arr);
+        // System.out.println(arr.length);
+
+        // Missing number demo
+        int[] arr = {1, 2, 4, 5, 3};
+        System.out.println(arrUtil.missingNumber(arr));
     }
 }
