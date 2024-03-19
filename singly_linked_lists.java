@@ -13,6 +13,8 @@ public class SinglyLinkedList{
 
     }
 
+
+
     // print out the list
     public void display(ListNode head){
         ListNode current = head;
@@ -157,26 +159,158 @@ public class SinglyLinkedList{
         return  previous;
     }
 
+    //Find a middle node in a singly linked list
+    public ListNode middleNode(ListNode head){
+        if(head == null){
+            return null;
+        }
+        ListNode slow = head;
+        ListNode fast = head;
+
+        while(fast != null && fast.next !=null){
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        return slow;
+    }
+
+    // Find the nth node from the end of a linked list in Java
+    public ListNode nthFromEnd(ListNode head, int n){
+        if (head == null){
+            return null;
+        }
+
+        ListNode main = head;
+        ListNode ref  = head;
+
+        int count = 0;
+        while(count < n){
+            ref = ref.next;
+            count++;
+        }
+
+        while(ref != null){
+            if(ref == null){
+                return null; // number is bigger than the length of the list
+            }
+            ref = ref.next;
+            main = main.next;
+        }
+
+        return main;
+    }
+
+    // Remove Duplicates in sorted linked lists
+    public void removeDuplicates(ListNode head){
+        if (head == null){
+            return ;
+        }
+       ListNode current = head;
+       while (current != null && current.next != null){
+           if (current.data == current.next.data){
+               current.next = current.next.next;
+           } else {
+               current = current.next;
+           }
+       }
+    }
+
+    // How to insert a node in a sorted singly linked list
+
+    public void insertNodeSorted(int value){
+        ListNode newNode = new ListNode(value);
+
+        if(head == null){
+            head = newNode;
+        } else if ( value <= head.data) {
+            newNode.next = head;
+            head = newNode;
+        } else {
+            ListNode current = head;
+            ListNode temp = null;
+            while (current != null && current.data < newNode.data){
+                temp = current;
+                current = current.next;
+            }
+
+            newNode.next = current;
+            temp.next = newNode;
+        }
+    }
+
+    //How to remove a given key from a linked list
+    public void removeKey(int value){
+        if(head == null){
+            return;
+        } else if (head.data == value) {
+            ListNode temp = head;
+            head = head.next;
+            temp.next = null;
+        } else {
+            ListNode current = head;
+            ListNode temp = null;
+            while (current != null && current.data != value){
+                temp = current;
+                current = current.next;
+            }
+            if (current == null){
+                return;
+            } else {
+                temp.next = current.next;
+                current.next = null;
+            }
+
+        }
+    }
+
+    // How to detect a loop in a singly linked list
+    // I used two pointers: fast and slow
+    public boolean hasLoop(){
+        ListNode fast = head;
+        ListNode slow = head;
+        while(fast !=null && fast.next != null){
+            fast = fast.next.next;
+            slow = slow.next;
+            if (slow == fast){
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     public static void main(String[] args) {
         SinglyLinkedList sll = new SinglyLinkedList();
-        sll.head = new ListNode(10);
-        ListNode second = new ListNode(1);
-        ListNode third = new ListNode(8);
-        ListNode fourth = new ListNode(11);
+        sll.head = new ListNode(1);
+        ListNode second = new ListNode(2);
+        ListNode third = new ListNode(3);
+        ListNode fourth = new ListNode(4);
+        ListNode fifth = new ListNode(5);
+        ListNode sixth = new ListNode(6);
 
         sll.head.next = second;
         second.next = third;
         third.next = fourth;
+        fourth.next = fifth;
+        fifth.next = sixth;
+        sixth.next = third;
 
-        sll.insertFirst(7);
-        sll.insertFirst(5);
-        sll.insertEnd(770);
-        sll.insertPosition(1,1);
-        sll.display(sll.head);
-        //ListNode temp = sll.deleteNode(2);
-        ListNode reversed = sll.reverseList(sll.head);
-        //System.out.println(sll.searchData(13));
-        sll.display(reversed);
+//        sll.insertEnd(17);
+//        sll.insertEnd(17);
+        // sll.insertPosition(18, 1);
+//        sll.display(sll.head);
+        // ListNode temp = sll.deleteNode(2);
+        // ListNode reversed = sll.reverseList(sll.head);
+        // int middlenode = sll.middleNode(sll.head).data;
+        // System.out.println(middlenode);
+        //int nthnode = sll.nthFromEnd(sll.head, 3).data;
+        //System.out.println(nthnode);
+        //sll.removeDuplicates(sll.head);
+        //sll.insertNodeSorted(8);
+        //sll.removeKey(17);
+        System.out.println(sll.hasLoop());
+//        sll.display(sll.head);
+        // sll.display(reversed);
     }
 }
