@@ -279,6 +279,75 @@ public class SinglyLinkedList{
         return false;
     }
 
+    // How to find start of a loop in a singly linked list
+    private ListNode getStartingNode(ListNode slow){
+        ListNode temp = head;
+        while (slow != temp){
+            temp = temp.next;
+            slow = slow.next;
+        }
+        return temp;
+    }
+    public ListNode startNodeInALoop(){
+        ListNode fast = head;
+        ListNode slow = head;
+        while(fast !=null && fast.next != null){
+            fast = fast.next.next;
+            slow = slow.next;
+            if (slow == fast){
+                return getStartingNode(slow);
+            }
+        }
+        return null;
+    }
+
+    // How to remove a loop from singly linked list
+
+    private void removeLoop(ListNode slow){
+        ListNode temp = head;
+        while (slow.next != temp.next){
+            temp = temp.next;
+            slow = slow.next;
+        }
+        slow.next = null;
+    }
+    public void endALoop(){
+        ListNode fast = head;
+        ListNode slow = head;
+        while(fast !=null && fast.next != null){
+            fast = fast.next.next;
+            slow = slow.next;
+            if (slow == fast){
+                removeLoop(slow);
+            }
+        }
+    }
+
+    // Merge two sorted singly linked lists
+    public ListNode merge(ListNode a, ListNode b){
+        ListNode dummy = new ListNode(0);
+        ListNode temp = dummy;
+
+        while(a != null &&  b != null){
+            if(a.data <= b.data){
+                temp.next = a;
+                a = a.next;
+            } else {
+                temp.next = b;
+                b = b.next;
+            }
+            temp = temp.next;
+        }
+        if (a == null){
+            temp.next = b;
+        } else {
+            tail.next= a;
+        }
+        return dummy.next
+    }
+
+
+
 
     public static void main(String[] args) {
         SinglyLinkedList sll = new SinglyLinkedList();
@@ -296,10 +365,10 @@ public class SinglyLinkedList{
         fifth.next = sixth;
         sixth.next = third;
 
-//        sll.insertEnd(17);
-//        sll.insertEnd(17);
+        //sll.insertEnd(17);
+        //sll.insertEnd(17);
         // sll.insertPosition(18, 1);
-//        sll.display(sll.head);
+        //sll.display(sll.head);
         // ListNode temp = sll.deleteNode(2);
         // ListNode reversed = sll.reverseList(sll.head);
         // int middlenode = sll.middleNode(sll.head).data;
@@ -309,8 +378,9 @@ public class SinglyLinkedList{
         //sll.removeDuplicates(sll.head);
         //sll.insertNodeSorted(8);
         //sll.removeKey(17);
-        System.out.println(sll.hasLoop());
-//        sll.display(sll.head);
+        //System.out.println(sll.hasLoop());
+        sll.endALoop();
+        sll.display(sll.head);
         // sll.display(reversed);
     }
 }
