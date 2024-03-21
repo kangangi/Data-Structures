@@ -1,2 +1,2 @@
 Practice questions for Data Structures and Algorithms.
-Also using to learn java. :wink: 
+Also using to practice java. :wink: 
