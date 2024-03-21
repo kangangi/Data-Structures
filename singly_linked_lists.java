@@ -341,29 +341,53 @@ public class SinglyLinkedList{
         if (a == null){
             temp.next = b;
         } else {
-            tail.next= a;
+            temp.next= a;
         }
-        return dummy.next
+        return dummy.next;
     }
 
+    // Given two non-empty linked lists representing two non-negative integers. The digits are
+    // stored in reverse order, and each of their nodes contains a single digit. Add the two numbers
+    // and return the sum as a linked list. You may assume the two numbers don't have any leading zero
+    // except the number 0 itself.
+
+    public ListNode add(ListNode a, ListNode b){
+        ListNode dummy = new ListNode(0);
+        ListNode temp = dummy;
+        int carry = 0; //for sums greater than 9
+        while(a != null || b != null ){
+            int x = (a != null) ? a.data: 0;
+            int y = (b != null) ? b.data: 0;
+            int sum = carry + x + y;
+            carry = sum / 10;
+            temp.next = new ListNode(sum % 10);
+            temp = temp.next;
+            if (a != null) a = a.next;
+            if (b != null) b = b.next;
+        }
+        if (carry > 0){
+            temp.next = new ListNode(carry);
+        }
+        return dummy.next;
+    }
 
 
 
     public static void main(String[] args) {
         SinglyLinkedList sll = new SinglyLinkedList();
-        sll.head = new ListNode(1);
-        ListNode second = new ListNode(2);
-        ListNode third = new ListNode(3);
-        ListNode fourth = new ListNode(4);
-        ListNode fifth = new ListNode(5);
-        ListNode sixth = new ListNode(6);
+        sll.head = new ListNode(7);
+        ListNode first = new ListNode(7);
+        ListNode second = new ListNode(4);
+        ListNode third = new ListNode(9);
+        ListNode fourth = new ListNode(5);
+        ListNode fifth = new ListNode(6);
+        ListNode sixth = new ListNode(1);
 
-        sll.head.next = second;
+        first.next = second;
         second.next = third;
-        third.next = fourth;
+
         fourth.next = fifth;
-        fifth.next = sixth;
-        sixth.next = third;
+
 
         //sll.insertEnd(17);
         //sll.insertEnd(17);
@@ -379,8 +403,10 @@ public class SinglyLinkedList{
         //sll.insertNodeSorted(8);
         //sll.removeKey(17);
         //System.out.println(sll.hasLoop());
-        sll.endALoop();
-        sll.display(sll.head);
+        //sll.endALoop();
+        //sll.display(sll.head);
+        ListNode result = sll.add(first, fourth);
+        sll.display(result);
         // sll.display(reversed);
     }
 }
