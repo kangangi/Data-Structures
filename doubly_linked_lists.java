@@ -1,3 +1,5 @@
+import java.util.NoSuchElementException;
+
 public class DoublylyLinkedList{
 
     private ListNode head;
@@ -77,6 +79,43 @@ public class DoublylyLinkedList{
         tail = newNode;
         length++;
     }
+     // Delete firstNode in a doubly linked list
+    public ListNode deleteFirst(){
+        if( isEmpty()){
+            System.out.println("This is empty");
+            throw new NoSuchElementException();
+        } else {
+            ListNode temp = head;
+            if (head == tail){
+                tail = null;
+            } else {
+                head.next.previous = null;
+            }
+
+            head = head.next;
+            temp.next = null;
+            length--;
+            return temp;
+        }
+
+    }
+    public ListNode deleteEnd(){
+        if (isEmpty()){
+            System.out.println("This is empty");
+            throw new NoSuchElementException();
+        }
+        ListNode temp = tail;
+        if (head == tail){
+            head = null;
+        } else {
+            tail.previous.next = null;
+        }
+        tail = tail.previous;
+        temp.previous = null;
+        length--;
+        return temp;
+    }
+
 
     public static void main(String[] args) {
         DoublylyLinkedList dll = new DoublylyLinkedList();
@@ -86,8 +125,16 @@ public class DoublylyLinkedList{
         dll.insertEnd(8);
 
         dll.displayForward();
-        dll.displayReverse();
-        System.out.println(dll.length);
+        dll.deleteEnd();
+        dll.displayForward();
+        dll.deleteEnd();
+        dll.displayForward();
+        dll.deleteEnd();
+        dll.displayForward();
+        dll.deleteEnd();
+        dll.displayForward();
+        dll.deleteEnd();
+        //dll.displayReverse();
     }
 
 
