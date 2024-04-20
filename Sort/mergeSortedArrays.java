@@ -28,6 +28,12 @@ public class MergeSortedArray{
         }
         return result;
     }
+    public void printArray(int[] arr){
+        for( int i =0; i < arr.length; i++){
+            System.out.print(arr[i] + ", ");
+        }
+        System.out.println(" ");
+    }
 
 
     public static void main(String[] args) {
@@ -35,10 +41,7 @@ public class MergeSortedArray{
         int[] arr1 = {2, 3, 5, 10};
         int[] arr2 = {2, 2, 4, 6, 11, 15};
         int [] result = msa.mergeSortedArray(arr1, arr2);
-        for( int i =0; i < result.length; i++){
-            System.out.print(result[i] + ", ");
-        }
-        System.out.println(" ");
+        msa.printArray(result);
     }
 }
 

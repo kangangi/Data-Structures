@@ -34,21 +34,20 @@ public class MergeSort{
             k++;
         }
     }
-
+    public void printArray(int[] arr){
+        for( int i =0; i < arr.length; i++){
+            System.out.print(arr[i] + ", ");
+        }
+        System.out.println(" ");
+    }
 
 
     public static void main(String[] args) {
         MergeSort ms = new MergeSort();
         int[] arr = {9, 5, 2, 4, 3};
-        for( int i =0; i < arr.length; i++){
-            System.out.print(arr[i] + ", ");
-        }
-        System.out.println(" ");
+        ms.printArray(arr);
         int[] sorted = ms.sort(arr, new int[arr.length], 0, arr.length-1);
-        for( int i =0; i < sorted.length; i++){
-            System.out.print(sorted[i] + ", ");
-        }
-        System.out.println(" ");
+        ms.printArray(sorted);
     }
 }
 
